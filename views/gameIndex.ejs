@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(54, 139, 29);
+        }
+        img {
+            width: 500px ; 
+            height: 300px ;
+            border-radius:10px;
+        }
+        .mainBodyContainer {
+            margin: auto;
+            max-width: 100%;
+            background-color: rgb(54, 139, 29);
+        }
+        .card {
+            background: black;
+            margin:auto;
+            width: 500px;
+            padding:10px;
+            border-radius: 10px;
+            position:relative;
+        }
+        .card-img {
+            margin:auto;
+            position:relative;
+            width:500px;
+        }
+        .title {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 12px;
+        }
+        .card-cont {
+            margin:auto;
+            width:500px;
+            word-break: break-all;
+        }
+        #card-cont {
+            color:white;
+        }
+
+        .uploadContainer {
+            margin-right:10px;
+            margin-left:10px;
+        }
+        .mypageContainer {
+            margin-right:10px;
+            margin-left: 10px;
+        }
+        #uploadButton {
+            float:right;
+            margin:10px;
+        }
+        #mypageButton {
+            float:right;
+            margin:10px;
+        }
+        #headingText {
+            color:white;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1 id="headingText">All Posts</h1>
+    <%if(isCoach) { %>
+        <div class="uploadContainer">
+            <form action="/gamingUpload" method="GET">
+                <button type="submit" id="uploadButton">Upload</button>
+            </form>
+        </div>
+    <% } %>
+    <%if(isCoach) { %>
+        <div class="mypageContainer">
+            <form action="/gamingUser/<%=username%>" method="GET">
+                <button type="submit" id="mypageButton">Manage My Posts</button>
+            </form>
+        </div>
+    <% } %>
+
+    <div class="viewCoaches">
+        <form action="/gamingUsers" method="GET">
+            <button type="submit" id="viewCoachesButton">See All Coaches</button>
+        </form>
+    </div>
+
+    <div class="mainBodyContainer">
+        <%for(let data of allData) { %>
+            <div class="card">
+                <div class="card-img">
+                    <a href=<%-data.url%>>
+                    <img src='<%=data.filename%>' alt=<%=data.originalname%>>
+                    </a>
+                    <div class="title"><%=data.title%></div>
+                </div>
+                <div class="card-cont">
+                    <p id="card-cont"><%=data.description%></p>
+                    <spam id="card-cont">Coach:</spam><strong id="card-cont"><%=data.contributer%></strong>
+                    <address id="card-cont">Contact:<a href="mailto:"+<%=data.email%>><%=data.email%></a></address>
+                </div>
+            </div>
+            <br><br>
+        <% } %>
+    </div>
+
+
+
+</body>
+</html>

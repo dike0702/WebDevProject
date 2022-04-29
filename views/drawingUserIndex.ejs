@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(54, 139, 29);
+        }
+        img {
+            width: 500px; 
+            height: 300px ;
+            border-radius:10px;
+        }
+        .mainBodyContainer {
+            margin: auto;
+            max-width: 100%;
+            background-color: rgb(54, 139, 29);
+        }
+        .card {
+            background: black;
+            margin:auto;
+            width: 500px;
+            padding:10px;
+            border-radius: 10px;
+            position:relative;
+        }
+        .card-img {
+            margin:auto;
+            position:relative;
+            width:500px;
+        }
+        .title {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 12px;
+        }
+        .card-cont {
+            margin:auto;
+            width:500px;
+            word-break: break-all;
+        }
+        #card-cont {
+            color:white;
+        }
+        #uploadButton {
+            float:right;
+        }
+
+        #headingText {
+            color:white;
+            text-align: center;
+        }
+        #editButton {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+            font-size: 12px;
+            color: white;
+            background-color: rgb(54, 139, 29);
+        }
+        #deleteButton {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            font-size: 12px;
+            color: white;
+            background-color: rgb(54, 139, 29);
+        }
+
+        label {
+            color:white;
+        }
+        
+        #formEdit{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1><%=usernameAccessed%>'s Posts</h1> 
+    <% if(allPosts) { %> 
+        <%for(let data of allPosts) { %>
+            <div class="card">
+                <div class="card-img">
+                    <a href=<%=data.url%>>
+                    <img src='/<%=data.filename%>' alt=<%=data.originalname%>>
+                    </a>
+                    <div class="title"><%=data.title%></div>
+                </div>
+                <div class="card-cont">
+                    <p id="card-cont"><%=data.description%></p>
+                    <spam id="card-cont">Coach:</spam><strong id="card-cont"><%=data.contributer%></strong>
+                    <!-- <address id="card-cont">Email:<a href="mailto:"+<%=data.email%>><%=data.email%></a></address> -->
+                </div>
+                <% if(usernameSession == data.contributer) {%> 
+                    <form action="/drawingUser/<%=usernameSession%>/<%=data.postid%>/delete" method="POST" id="deleteButton" onsubmit="return confirm('Are you sure you want to delete this post?')">
+                        <button>Delete</button>
+                    </form>
+                    <form action="/drawingUser/<%=usernameSession%>/<%=data.postid%>" method="GET" id="editButton">
+                        <button type="submit">Edit</button>
+                    </form>
+                <% } %> 
+                <br><br>
+            </div>
+        <% } %>
+    <% } %> 
+</body>
+</html>

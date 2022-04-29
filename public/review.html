@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="stylesheet" type="text/css" href="css/review.css">
+    <script src="js/review.js" defer></script>
+</head>
+<body>
+    <form method="POST" acction="/api/review" enctype="multipart/form-data">
+        <!-- この中にレビュー記載 -->
+        <label>Review</label>
+        <div>
+            <span class="star" id="1">★</span>
+            <span class="star" id="2">★</span>
+            <span class="star" id="3">★</span>
+            <span class="star" id="4">★</span>
+            <span class="star" id="5">★</span>
+        </div>
+        <div class="rateField">
+            <label id="rateLabel">Enter your rate 1 ~ 5</label>
+            <input type="number" id="rate" name="rate" min="1" max="5" required><br>
+        </div>
+        <div class="reasonField">
+            <textarea id="reason" name="reason" cols="30" rows="5" name="reason" placeholder="Reason" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="reiewField">
+        <!-- 他者のレビューを記載 -->
+        <div id="rate"> </div>
+        <div id="description"> </div>
+    </div>
+
+
+    <!-- <script>
+        // var starRate = document.getElementsById("rate");
+        // starRate.innerHtml = "星の数fromSQL";
+
+        // var reason = document.getElementsById("description");
+        // reason.innerHtml = "理由の文章fromSQL";
+
+        var stars = document.getElementsByClassName("star");
+        var clicked = false;
+        var reviewScore = 0;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].addEventListener("mouseover",() => {
+                    if (!clicked) {
+                        for (let j = 0; j <= i; j++) {
+                            stars[j].style.color = "orange";
+                        }
+                    }
+                }, false);
+                stars[i].addEventListener("mouseout",() => {
+                    if (!clicked) {
+                        for (let j = 0; j < stars.length; j++) {
+                            stars[j].style.color = "gray";
+                        }
+                    }
+                }, false);
+                stars[i].addEventListener("click",() => {
+                    clicked = true;
+                    for (let j = 0; j <= i; j++) {
+                        stars[j].style.color = "orange";
+                        // レビューのスコアをSQLに渡したい
+                        // userID = req.session.user.userID;
+                        // updateRate(userID, reviewScore);
+                        // const average = getRate(userID);
+                        // var elem = document.getElementById("starCount");
+                        // elem.innerHTML = average + " out of 5";
+                    }
+                    for (let j = i + 1; j < stars.length; j++) {
+                        stars[j].style.color = "gray";
+                    }
+                }, false);
+            }
+        });
+
+    </script> -->
+</body>
+</html>
